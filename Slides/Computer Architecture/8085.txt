@@ -79,3 +79,14 @@ HLT           ; Halt execution
 ========================================================================================================================================================================
 
 Q)WAAP to trnasfer 5 8-bit data from 6000H to 7000H in reverse order
+LXI B, 6005H
+LXI H, 7000
+MVI D, 05H
+LOOP: LDAX B (A<-[BC])
+STAX H ([HL]<-A)
+DCX B
+INX H
+DCR D
+JNZ LOOP
+HLT
+    
