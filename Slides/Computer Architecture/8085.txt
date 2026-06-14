@@ -41,9 +41,41 @@ L1: ADD 09H
 NEXT -> 50 -> NEXT -> 32 -> NEXT -> 00 -> NEXT -> 80 -> NEXT -> 76
 Answer: 51 in memory location 8000
 
+================================================================================================================================================================================
 
 Q)Write and 8085 instruction to subtract 05H from the accumulator
+SUI 05H
+---------------------------------------------------------------------------------------
+5000->Next->D6->Next->05
 
-Q)WAAP to find square of the number stored in C001H and store in C002H 
+================================================================================================================================================================================
+
+Q)WAAP to find square of the number stored in C001H and store in C002H
+LDA C001H     
+MOV B, A      
+MOV C, A      
+MVI A, 00H    
+
+LOOP: ADD B   
+DCR C         
+JNZ LOOP      
+
+STA C002H     
+HLT           
+------------------------------------------------------------------------------------------------
+5000 -> NEXT -> 3A -> NEXT -> 01 -> NEXT -> C0 -> NEXT -> 47 -> NEXT -> 4F -> NEXT -> 3E -> NEXT -> 00 -> 
+NEXT -> 80 -> NEXT -> 0D -> NEXT -> C2 -> NEXT -> 09 -> NEXT -> 50 -> NEXT -> 32 -> NEXT -> 02 -> NEXT -> C0 -> NEXT -> 76
+
+====================================================================================================================================================================================
 
 Q)WAAP to mask D5 bit of a number stored at memory location 8000H 
+LDA 8000H     ; Load the original number from memory 8000H into Accumulator
+ANI DFH       ; Bitwise AND with DFH to force bit D5 to 0, leaving others unchanged
+STA 8001H     ; Store the masked result at memory location 8001H
+HLT           ; Halt execution
+---------------------------------------------------------------------------------------------------------
+5000 -> NEXT -> 3A -> NEXT -> 00 -> NEXT -> 80 -> NEXT -> E6 -> NEXT -> DF -> NEXT -> 32 -> NEXT -> 01 -> NEXT -> 80 -> NEXT -> 76
+
+========================================================================================================================================================================
+
+Q)WAAP to trnasfer 5 8-bit data from 6000H to 7000H in reverse order
