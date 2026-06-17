@@ -1,0 +1,92 @@
+Q)WAAP to find 1's complement of a number
+Step 1 : Data entry -> Reset -> Examination
+3000 - 0A
+3005 - 00
+3000->Next->0A->Next
+3005->Next->00->Next
+
+Step 2 : Program entry
+Reset->Exam Mem
+----------------------------------------------------------------------------------------------------------------------
+4000->Next->3A->Next->00->Next->30->Next->2F->Next->32->Next->05->Next->30->76->Next
+
+Step 3 : Execution
+Reset->Exec( . )->Go->4000->Exec( . )
+
+===========================================================================================================================================================================
+
+Q)Write A program to write two 8-bit immediate data and store the result to memory address 3010H.
+MVI A, 05H
+MVI B, 03H
+ADD B
+STA 3010H
+HLT
+------------------------------------------------------------------------------------------------------------------------
+2000->Next->3E->Next->05->Next->06->Next->03->Next->80->Next->32->Next->10->Next->30->Next->76
+
+Reset->Exec->Go->2000->Exec
+
+===========================================================================================================================================================================
+
+Q)WAAP to find square of 09H.
+MVI A, 00H
+MVI B, 09H
+
+L1: ADD 09H
+    DCR B
+    JNZ L1
+    HLT
+------------------------------------------------------------------------------------
+5000 -> NEXT -> 3E -> NEXT -> 00 -> NEXT -> 06 -> NEXT -> 09 -> NEXT -> C6 -> NEXT -> 09 -> NEXT -> 05 -> NEXT -> C2 -> NEXT -> 04 -> 
+NEXT -> 50 -> NEXT -> 32 -> NEXT -> 00 -> NEXT -> 80 -> NEXT -> 76
+Answer: 51 in memory location 8000
+
+================================================================================================================================================================================
+
+Q)Write and 8085 instruction to subtract 05H from the accumulator
+SUI 05H
+---------------------------------------------------------------------------------------
+5000->Next->D6->Next->05
+
+================================================================================================================================================================================
+
+Q)WAAP to find square of the number stored in C001H and store in C002H
+LDA C001H     
+MOV B, A      
+MOV C, A      
+MVI A, 00H    
+
+LOOP: ADD B   
+DCR C         
+JNZ LOOP      
+
+STA C002H     
+HLT           
+------------------------------------------------------------------------------------------------
+5000 -> NEXT -> 3A -> NEXT -> 01 -> NEXT -> C0 -> NEXT -> 47 -> NEXT -> 4F -> NEXT -> 3E -> NEXT -> 00 -> 
+NEXT -> 80 -> NEXT -> 0D -> NEXT -> C2 -> NEXT -> 09 -> NEXT -> 50 -> NEXT -> 32 -> NEXT -> 02 -> NEXT -> C0 -> NEXT -> 76
+
+====================================================================================================================================================================================
+
+Q)WAAP to mask D5 bit of a number stored at memory location 8000H 
+LDA 8000H     ; Load the original number from memory 8000H into Accumulator
+ANI DFH       ; Bitwise AND with DFH to force bit D5 to 0, leaving others unchanged
+STA 8001H     ; Store the masked result at memory location 8001H
+HLT           ; Halt execution
+---------------------------------------------------------------------------------------------------------
+5000 -> NEXT -> 3A -> NEXT -> 00 -> NEXT -> 80 -> NEXT -> E6 -> NEXT -> DF -> NEXT -> 32 -> NEXT -> 01 -> NEXT -> 80 -> NEXT -> 76
+
+========================================================================================================================================================================
+
+Q)WAAP to trnasfer 5 8-bit data from 6000H to 7000H in reverse order
+LXI B, 6005H
+LXI H, 7000
+MVI D, 05H
+LOOP: LDAX B (A<-[BC])
+STAX H ([HL]<-A)
+DCX B
+INX H
+DCR D
+JNZ LOOP
+HLT
+    
